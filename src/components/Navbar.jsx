@@ -10,8 +10,17 @@ const Navbar = () => {
             </div>
             <nav className="navBar">
                 <ul>
-                    <li><NavLink to="/">Register</NavLink></li>
-                    <li><NavLink to="/login">Login</NavLink></li>
+                    <li><NavLink
+                        className={({ isActive }) => isActive ? "active-route" : undefined}
+                        to="/"
+                    >
+                        Register</NavLink></li>
+
+                    <li><NavLink
+                        className={({ isActive }) => isActive ? "active-route" : undefined}
+                        to="/login"
+                    >
+                        Login</NavLink></li>
                 </ul>
             </nav>
         </header>
