@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login";
 import Register from "./components/Register";
 import MainLayout from "./layouts/MainLayout";
 
@@ -12,6 +13,10 @@ function App() {
           path: "/",
           element: <Register />
         },
+        {
+          path: "/login",
+          element: <Login />
+        }
       ]
     }
   ])
