@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Register from "./components/Register";
 import MainLayout from "./layouts/MainLayout";
 
 function App() {
@@ -6,6 +7,12 @@ function App() {
     {
       path: "/",
       element: <MainLayout />,
+      children: [
+        {
+          path: "/",
+          element: <Register />
+        },
+      ]
     }
   ])
 
