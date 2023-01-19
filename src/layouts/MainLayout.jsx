@@ -1,9 +1,11 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
+import '../styles/MainLayout.css';
 
 const MainLayout = () => {
     return (
-        <div className="header">
-            <h1>hey react</h1>
+        <div className="main-layout">
+            <Navbar />
         </div>
     )
 }
