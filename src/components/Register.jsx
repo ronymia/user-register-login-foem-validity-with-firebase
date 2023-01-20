@@ -24,17 +24,24 @@ const Register = () => {
         console.log(e.target.value)
         setUserName({ ...userName, userName: e.target.value })
     }
-    const emailChange = (e) => {
-        console.log(e.target.value)
-        setEmail({ ...email, email: e.target.value })
+
+    const emailChange = (emailInput) => {
+        const errorMessage = 'Please provide a valid Email';
+
+        if (/^\S+@\S+\.\S+$/.test(emailInput)) {
+            setEmail({ email: emailInput });
+        } else {
+            setEmail({ email: emailInput, errorMessage: errorMessage });
+        }
     }
+
     const passwordChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setPassword({ ...password, password: e.target.value })
     }
     const confirmPasswordChange = (e) => {
-        console.log(e.target.value)
-        setConfirmPassword({ ...confirmPassword, confirmPassword: e.target.value })
+        setConfirmPassword({ ...confirmPassword, confirmPassword: e.target.value });
+        // console.log(e.target.value)
     }
 
     return (
@@ -53,11 +60,12 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="email">Email</label>
                     <input type='text'
-                        onChange={emailChange}
+                        onChange={(e) => emailChange(e.target.value)}
                         name="email"
                         placeholder="Email address"
                         value={email.email}
                     />
+                    {email?.errorMessage && <p>{email.errorMessage}</p>}
                 </div>
                 <div className="form-input">
                     <label htmlFor="password">Password</label>
