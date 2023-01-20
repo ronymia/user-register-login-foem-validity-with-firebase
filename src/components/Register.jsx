@@ -4,11 +4,11 @@ import '../styles/Register.css';
 
 const Register = () => {
     const [userName, setUserName] = useState({
-        userName: '',
+        value: '',
         errorMessage: ''
     });
     const [email, setEmail] = useState({
-        email: '',
+        value: '',
         errorMessage: ''
     });
     const [password, setPassword] = useState({
@@ -20,18 +20,23 @@ const Register = () => {
         errorMessage: ''
     });
 
-    const userNameChange = (e) => {
-        console.log(e.target.value)
-        setUserName({ ...userName, userName: e.target.value })
+    const userNameChange = (userNameInput) => {
+        const errorMessage = 'user name only allow lowercase letters (a-z) and numbers(0-9)';
+
+        if (/^[a-z0-9]+$/.test(userNameInput)) {
+            setUserName({ value: userNameInput })
+        } else {
+            setUserName({ value: userNameInput, errorMessage: errorMessage })
+        }
     }
 
     const emailChange = (emailInput) => {
         const errorMessage = 'Please provide a valid Email';
 
         if (/^\S+@\S+\.\S+$/.test(emailInput)) {
-            setEmail({ email: emailInput });
+            setEmail({ value: emailInput });
         } else {
-            setEmail({ email: emailInput, errorMessage: errorMessage });
+            setEmail({ value: emailInput, errorMessage: errorMessage });
         }
     }
 
@@ -51,11 +56,12 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="userName">User Name</label>
                     <input type='text'
-                        onChange={userNameChange}
+                        onChange={(e) => userNameChange(e.target.value)}
                         name="userName"
                         placeholder="user name"
-                        value={userName.userName}
+                        value={userName.value}
                     />
+                    {userName?.errorMessage && <p>{userName.errorMessage}</p>}
                 </div>
                 <div className="form-input">
                     <label htmlFor="email">Email</label>
@@ -63,7 +69,7 @@ const Register = () => {
                         onChange={(e) => emailChange(e.target.value)}
                         name="email"
                         placeholder="Email address"
-                        value={email.email}
+                        value={email.value}
                     />
                     {email?.errorMessage && <p>{email.errorMessage}</p>}
                 </div>
