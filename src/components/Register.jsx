@@ -12,13 +12,15 @@ const Register = () => {
         errorMessage: ''
     });
     const [password, setPassword] = useState({
-        password: '',
+        value: '',
         errorMessage: ''
     });
     const [confirmPassword, setConfirmPassword] = useState({
         confirmPassword: '',
         errorMessage: ''
     });
+
+
 
     const userNameChange = (userNameInput) => {
         const errorMessage = 'user name only allow lowercase letters (a-z) and numbers(0-9)';
@@ -40,10 +42,17 @@ const Register = () => {
         }
     }
 
-    const passwordChange = (e) => {
-        // console.log(e.target.value)
-        setPassword({ ...password, password: e.target.value })
+    const passwordChange = (passwordInput) => {
+        const errorMessage = 'Password must be 6 character';
+
+        if (passwordInput.length < 5) {
+            setPassword({ value: passwordInput, errorMessage: errorMessage })
+        } else {
+            setPassword({ value: passwordInput })
+        }
     }
+
+
     const confirmPasswordChange = (e) => {
         setConfirmPassword({ ...confirmPassword, confirmPassword: e.target.value });
         // console.log(e.target.value)
@@ -76,11 +85,12 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="password">Password</label>
                     <input type='text'
-                        onChange={passwordChange}
+                        onChange={(e) => passwordChange(e.target.value)}
                         name="password"
                         placeholder="New Password"
-                        value={password.password}
+                        value={password.value}
                     />
+                    {password?.errorMessage && <p>{password.errorMessage}</p>}
                 </div>
                 <div className="form-input">
                     <label htmlFor="confirmPassword">Confirm Password</label>
