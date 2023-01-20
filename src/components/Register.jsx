@@ -52,9 +52,8 @@ const Register = () => {
         }
     }
 
-
     const confirmPasswordChange = (passwordInput) => {
-        const errorMessage = 'Pasword did not match'
+        const errorMessage = 'asword did not match'
         const prePassword = (password.value);
 
         if (prePassword === passwordInput) {
@@ -64,9 +63,32 @@ const Register = () => {
         }
     }
 
+
+    const handlePasswordAuth = (e) => {
+        e.preventDefault();
+
+        if (!userName.value) {
+            const error = 'User Name required';
+            setUserName({ ...userName, errorMessage: error });
+        }
+
+        if (!email.value) {
+            const errorEmail = "Email is required";
+            setEmail({ ...email, errorMessage: errorEmail });
+            console.log(email.errorMessage);
+        }
+
+        if (!password.value || !confirmPassword.value) {
+            const errorPassword = "Password is required";
+            setPassword({ ...password, errorMessage: errorPassword })
+            console.log(password.errorMessage);
+            setConfirmPassword({ ...confirmPassword, errorMessage: errorPassword })
+        }
+    }
+
     return (
         <div className="form-field">
-            <form>
+            <form onSubmit={handlePasswordAuth}>
                 <h1>Register</h1>
                 <div className="form-input">
                     <label htmlFor="userName">User Name</label>
