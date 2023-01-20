@@ -20,6 +20,23 @@ const Register = () => {
         errorMessage: ''
     });
 
+    const userNameChange = (e) => {
+        console.log(e.target.value)
+        setUserName({ ...userName, userName: e.target.value })
+    }
+    const emailChange = (e) => {
+        console.log(e.target.value)
+        setEmail({ ...email, email: e.target.value })
+    }
+    const passwordChange = (e) => {
+        console.log(e.target.value)
+        setPassword({ ...password, password: e.target.value })
+    }
+    const confirmPasswordChange = (e) => {
+        console.log(e.target.value)
+        setConfirmPassword({ ...confirmPassword, confirmPassword: e.target.value })
+    }
+
     return (
         <div className="form-field">
             <form>
@@ -27,6 +44,7 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="userName">User Name</label>
                     <input type='text'
+                        onChange={userNameChange}
                         name="userName"
                         placeholder="user name"
                         value={userName.userName}
@@ -35,6 +53,7 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="email">Email</label>
                     <input type='text'
+                        onChange={emailChange}
                         name="email"
                         placeholder="Email address"
                         value={email.email}
@@ -43,6 +62,7 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="password">Password</label>
                     <input type='text'
+                        onChange={passwordChange}
                         name="password"
                         placeholder="New Password"
                         value={password.password}
@@ -51,6 +71,7 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type='text'
+                        onChange={confirmPasswordChange}
                         name="confirmPassword"
                         placeholder="password"
                         value={confirmPassword.confirmPassword}
