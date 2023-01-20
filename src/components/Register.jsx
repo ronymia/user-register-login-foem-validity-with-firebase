@@ -16,7 +16,7 @@ const Register = () => {
         errorMessage: ''
     });
     const [confirmPassword, setConfirmPassword] = useState({
-        confirmPassword: '',
+        value: '',
         errorMessage: ''
     });
 
@@ -45,17 +45,23 @@ const Register = () => {
     const passwordChange = (passwordInput) => {
         const errorMessage = 'Password must be 6 character';
 
-        if (passwordInput.length < 5) {
-            setPassword({ value: passwordInput, errorMessage: errorMessage })
+        if (passwordInput.length < 6) {
+            setPassword({ value: passwordInput, errorMessage: errorMessage });
         } else {
-            setPassword({ value: passwordInput })
+            setPassword({ value: passwordInput });
         }
     }
 
 
-    const confirmPasswordChange = (e) => {
-        setConfirmPassword({ ...confirmPassword, confirmPassword: e.target.value });
-        // console.log(e.target.value)
+    const confirmPasswordChange = (passwordInput) => {
+        const errorMessage = 'Pasword did not match'
+        const prePassword = (password.value);
+
+        if (prePassword === passwordInput) {
+            setConfirmPassword({ value: passwordInput });
+        } else {
+            setConfirmPassword({ value: passwordInput, errorMessage: errorMessage });
+        }
     }
 
     return (
@@ -95,11 +101,12 @@ const Register = () => {
                 <div className="form-input">
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type='text'
-                        onChange={confirmPasswordChange}
+                        onChange={(e) => confirmPasswordChange(e.target.value)}
                         name="confirmPassword"
                         placeholder="password"
-                        value={confirmPassword.confirmPassword}
+                        value={confirmPassword.value}
                     />
+                    {confirmPassword?.errorMessage && <p>{confirmPassword.errorMessage}</p>}
                 </div>
                 <h6>Already Have an Account?<Link className="togol-form" to="/login">Login here</Link></h6>
                 <button type="submit">Register</button>
