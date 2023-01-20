@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import '../styles/Register.css';
+import { auth } from '../firebase/firebase.init';
 
 const Register = () => {
     const [userName, setUserName] = useState({
@@ -84,6 +86,21 @@ const Register = () => {
             console.log(password.errorMessage);
             setConfirmPassword({ ...confirmPassword, errorMessage: errorPassword })
         }
+
+        // create new user
+        const userEmail = email.value;
+        const userPassword = password.value;
+
+        createUserWithEmailAndPassword(auth, userEmail, userPassword)
+            .then(res => {
+                const user = res.user;
+                console.log(user);
+            })
+            .catch(error => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
+
     }
 
     return (
